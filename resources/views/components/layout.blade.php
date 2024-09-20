@@ -70,6 +70,12 @@
                         @can('Add Game')
                         <li><a href="{{route('auth.mangeUsers')}}">Users</a></li>
                         @endcan
+                        @can('Add Game')
+                        <li><a href="{{route('game.index')}}">Games</a></li>
+                        @endcan
+                        @can('Add Game')
+                        <li><a href="{{route('category.index')}}">Categories</a></li>
+                        @endcan
                         <li>
                             <form action="{{route('logout')}}" method="POST">
                             @csrf

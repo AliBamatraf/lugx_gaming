@@ -12,6 +12,8 @@
 
     <div class="section trending">
         <div class="container">
+            <a href="{{route('game.index')}}" class="btn btn-primary">Games</a>
+            
             @session('success')
                 
             <div class="alert alert-success" role="alert">

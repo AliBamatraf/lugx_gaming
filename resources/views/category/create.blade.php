@@ -11,6 +11,8 @@
 
     <div class="section trending">
         <div class="container">
+            <a href="{{route('category.index')}}" class="btn btn-primary">Categories</a>
+            <br>
             @session('success')
                 
             <div class="alert alert-success" role="alert">
