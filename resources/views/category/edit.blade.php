@@ -1,17 +1,19 @@
 <x-layout>
     <div class="page-heading header-text">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <h3>Edit Category</h3>
-              <span class="breadcrumb">{{$category -> name}}</span>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Edit Category</h3>
+                    <span class="breadcrumb">{{$category -> name}}</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <div class="section trending">
         <div class="container">
+            <a href="{{route('category.index')}}" class="btn btn-primary">Categories</a>
+            <br>
             @session('success')
                 
             <div class="alert alert-success" role="alert">
