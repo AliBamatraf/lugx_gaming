@@ -36,9 +36,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request, CategoryService $CategoryService)
+    public function store(StoreCategoryRequest $request, CategoryService $categoryService)
     {
-        $CategoryService->StoreCategoryService($request);
+        $categoryService->StoreCategoryService($request);
         return back()->with([
             'success' => 'the category has been created'
         ]);
@@ -56,10 +56,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category, CategoryService $CategoryService)
+    public function update(UpdateCategoryRequest $request, Category $category, CategoryService $categoryService)
     {
 
-        $CategoryService->UpdateCategoryService($request, $category);
+        $categoryService->UpdateCategoryService($request, $category);
         return back()->with([
             'success' => 'the category has been updated'
         ]);
@@ -68,9 +68,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category, CategoryService $CategoryService)
+    public function destroy(Category $category, CategoryService $categoryService)
     {
-        $CategoryService->DeleteCategoryService($category);
+        $categoryService->DeleteCategoryService($category);
         return back()->with([
             'success' => 'the category has been deleted'
         ]);

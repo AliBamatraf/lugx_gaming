@@ -7,6 +7,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesAndPermissionController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use App\Models\Game;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -50,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home.orders', [HomeController::class, 'Orders'])->name('orders');
 
 
-    Route::controller(GameController::class)->middleware('role:user')->group(function () {
+    Route::controller(StripeController::class)->middleware('role:user')->group(function () {
         Route::post('stripe/{currentGame}', 'stripe')->name('stripe');
         Route::post('stripePayment/{currentGame}', 'stripePost')->name('stripe.post');
     });

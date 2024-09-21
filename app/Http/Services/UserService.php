@@ -13,7 +13,12 @@ class UserService
     public function RegisterUserService(Request $request)
     {
         //Create User
-        $user = User::Create($request);
+        $user = User::Create([
+            'name' =>$request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            
+        ]);
 
         //Login the registerd user
         Auth::login($user);
