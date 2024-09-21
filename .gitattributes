@@ -1,0 +1,33 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+
+# Ignore all minified files
+*.js linguist-vendored
+*.min.js linguist-vendored
+*.slim.js linguist-vendored
+*.min.map linguist-vendored
+
+*.min.css linguist-vendored
+
+
+
+# Ignore vendor directory (PHP dependencies)
+vendor/* linguist-vendored
+
+public/jquery/* linguist-vendored
+public/js/* linguist-vendored
+# Ignore node_modules directory (JavaScript dependencies)
+node_modules/* linguist-vendored
+
+# Ignore generated build artifacts
+dist/* linguist-vendored
+build/* linguist-vendored
