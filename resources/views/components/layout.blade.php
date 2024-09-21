@@ -68,7 +68,7 @@
                         <li><a href="{{route('orders')}}">Orders</a></li>
                         @endcan
                         @can('Add Game')
-                        <li><a href="{{route('auth.mangeUsers')}}">Users</a></li>
+                        <li><a href="{{route('user.mangeUsers')}}">Users</a></li>
                         @endcan
                         @can('Add Game')
                         <li><a href="{{route('game.index')}}">Games</a></li>
