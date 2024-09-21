@@ -7,6 +7,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesAndPermissionController;
+use App\Http\Controllers\UserController;
 use App\Models\Game;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ Route::get('/contactUs', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     //The Email Verification Notice route
     Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
@@ -59,9 +60,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/game', GameController::class);
 
-        Route::get('mangeUsers', [AuthController::class, 'mangeUsers'])->name('auth.mangeUsers');
+        Route::get('mangeUsers', [UserController::class, 'mangeUsers'])->name('user.mangeUsers');
 
-        Route::delete('deleteUser/{user}', [AuthController::class, 'deleteUser'])->name('auth.deleteUser');
+        Route::delete('deleteUser/{user}', [UserController::class, 'deleteUser'])->name('user.deleteUser');
     });
 
     Route::get('/game/{game}', [GameController::class, 'show'])->middleware('verified')->name('game.show');
@@ -74,8 +75,8 @@ Route::middleware('guest')->group(function () {
     })->name('login');
 
     //Login with User account
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register'])->name('register');
 
     //Login with facebook
     Route::get('login/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login.facebook');

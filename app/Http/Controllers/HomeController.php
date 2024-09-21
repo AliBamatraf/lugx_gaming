@@ -50,8 +50,7 @@ class HomeController extends Controller
 
         //get the categories
         $categories = Category::all();
-        // dd($games);
-
+        
         // return view with all the games
         return view('home.shop', [
             'games' => $games,
