@@ -44,7 +44,7 @@
                         <td>{{$user -> email}}</td>
                         <td>
                             <span class="d-grid gap-2 d-md-flex justify-content-md">
-                                <form action="{{route('auth.deleteUser',$user)}}" method="post">
+                                <form action="{{route('user.deleteUser',$user)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger">Delete</button>
