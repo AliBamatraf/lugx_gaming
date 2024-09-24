@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 
 class UserService
 {
-    public function RegisterUserService(Request $request)
+    public function registerUserService(Request $request)
     {
         //Create User
         $user = User::Create([
@@ -37,7 +37,7 @@ class UserService
 
     }
 
-    public function LogoutUserService(Request $request)
+    public function logoutUserService(Request $request)
     {
         //logout out the current user
         Auth::logout();

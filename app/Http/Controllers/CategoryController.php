@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request, CategoryService $categoryService)
     {
-        $categoryService->StoreCategoryService($request);
+        $categoryService->storeCategoryService($request);
         return back()->with([
             'success' => 'the category has been created'
         ]);
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category, CategoryService $categoryService)
     {
 
-        $categoryService->UpdateCategoryService($request, $category);
+        $categoryService->updateCategoryService($request, $category);
         return back()->with([
             'success' => 'the category has been updated'
         ]);
@@ -70,7 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, CategoryService $categoryService)
     {
-        $categoryService->DeleteCategoryService($category);
+        $categoryService->deleteCategoryService($category);
         return back()->with([
             'success' => 'the category has been deleted'
         ]);

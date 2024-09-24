@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/verification-notification', [AuthController::class, 'resendEmailVerification'])->middleware('throttle:6,1')->name('verification.send');
 
     //User Orders
-    Route::get('/home.orders', [HomeController::class, 'Orders'])->name('orders');
+    Route::get('/home.orders', [HomeController::class, 'orders'])->name('orders');
 
 
     Route::controller(StripeController::class)->middleware('role:user')->group(function () {

@@ -14,7 +14,7 @@ class UserController extends Controller
     // SignUp method
     public function register(RegisterRequest $request, UserService $userService)
     {
-        $userService->RegisterUserService($request);
+        $userService->registerUserService($request);
         //redirect the user to the home
         return redirect()->route('verification.notice');
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
 
     public function logout(Request $request, UserService $userService)
     {
-        $userService->LogoutUserService($request);
+        $userService->logoutUserService($request);
 
         return redirect()->route('home');
     }

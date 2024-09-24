@@ -50,7 +50,7 @@ class HomeController extends Controller
 
         //get the categories
         $categories = Category::all();
-        
+
         // return view with all the games
         return view('home.shop', [
             'games' => $games,
@@ -58,13 +58,13 @@ class HomeController extends Controller
         ]);
     }
     //Get logged user orders
-    public function Orders()
+    public function orders()
     {
         //Get current user
         $user = Auth::user();
 
         //Get current user orders
-        $orders = Order::with('Game')->where('user_id', '=', $user->id)->paginate(10);
-        return view('home.orders', ['orders' => $orders ]);
+        $orders = Order::with('game')->where('user_id', '=', $user->id)->paginate(10);
+        return view('home.orders', ['orders' => $orders]);
     }
 }

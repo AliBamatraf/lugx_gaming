@@ -12,7 +12,7 @@ use Stripe;
 
 class StripeService
 {
-    public function PostStripeService(Request $request, Game $currentGame)
+    public function postStripeService(Request $request, Game $currentGame)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $quantity = $request->quantity;

@@ -41,7 +41,7 @@ class GameController extends Controller
     //Store a newly created resource in storage.
     public function store(StoreGameRequest $request, GameService $gameService)
     {
-        $gameService->StoreGameService($request);
+        $gameService->storeGameService($request);
 
         return back()->with([
             'success' => 'the game has been created'
@@ -79,7 +79,7 @@ class GameController extends Controller
     //Update the specified resource in storage.
     public function update(UpdateGameRequest $request, Game $game, GameService $gameService)
     {
-        $gameService->UpdateGameService($request, $game);
+        $gameService->updateGameService($request, $game);
         return back()->with([
             'success' => 'the game has been updated'
         ]);
@@ -87,7 +87,7 @@ class GameController extends Controller
     //Remove the specified resource from storage.
     public function destroy(Game $game, GameService $gameService)
     {
-        $gameService->DeleteGameService($game);
+        $gameService->deleteGameService($game);
         return back()->with([
             'success' => 'the game has been deleted'
         ]);

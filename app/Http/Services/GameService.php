@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GameService
 {
-    public function StoreGameService(Request $request)
+    public function storeGameService(Request $request)
     {
         //put the categoryIds into list 
         $categoryIds = $request->input('category_id', []);
@@ -31,7 +31,7 @@ class GameService
         $game->categories()->attach($categoryIds);
     }
 
-    public function UpdateGameService(Request $request, Game $game)
+    public function updateGameService(Request $request, Game $game)
     {
         //put the categoryIds into list 
         $categoryIds = $request->input('category_id', []);
@@ -56,7 +56,7 @@ class GameService
         $game->categories()->sync($categoryIds);
     }
 
-    public function DeleteGameService(Game $game)
+    public function deleteGameService(Game $game)
     {
         Storage::disk('public')->delete($game->image);
 

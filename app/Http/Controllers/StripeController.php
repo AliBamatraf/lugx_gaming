@@ -32,7 +32,7 @@ class StripeController extends Controller
      */
     public function stripePost(Request $request, Game $currentGame, StripeService $stripeService): RedirectResponse
     {
-        $stripeService->PostStripeService($request, $currentGame);
+        $stripeService->postStripeService($request, $currentGame);
         return redirect()->route('home');
     }
 }

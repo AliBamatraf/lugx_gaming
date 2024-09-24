@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryService
 {
-    public function StoreCategoryService(Request $request)
+    public function storeCategoryService(Request $request)
     {
         //check the path of image
         $path = null;
@@ -22,7 +22,7 @@ class CategoryService
         ]);
     }
 
-    public function UpdateCategoryService(Request $request, Category $category)
+    public function updateCategoryService(Request $request, Category $category)
     {
         //check the path of image
         $path = $category->image ?? null;
@@ -39,7 +39,7 @@ class CategoryService
         ]);
     }
 
-    public function DeleteCategoryService(Category $category)
+    public function deleteCategoryService(Category $category)
     {
         Storage::disk('public')->delete($category->image);
 
