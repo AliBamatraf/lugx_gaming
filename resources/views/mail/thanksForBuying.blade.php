@@ -44,7 +44,9 @@
     <p>Your order has been successfully completed. We appreciate your business!</p>
 </div>
 <div>
-    <img src="{{$message->embed('storage/'.$game->image)}}" alt="" srcset="">
+    <img src="{{asset('storage/' .$game->image)}}" alt="" srcset="">
 </div>
+
 </body>
 </html>
+{{-- {{$message->embed($game->image)}}"  --}}

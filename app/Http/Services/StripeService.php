@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Jobs\SendThanksForBuyingEmail;
 use App\Models\Game;
 use App\Mail\ThanksForBuying;
 use App\Models\Order;
@@ -32,6 +33,6 @@ class StripeService
             'quantity' => $quantity,
             'total_price' => $totalPrice,
         ]);
-        dispatch(Mail::to($user)->send(new ThanksForBuying($user, $currentGame)))->afterResponse();
+        dispatch(new SendThanksForBuyingEmail($user, $currentGame));
     }
 }

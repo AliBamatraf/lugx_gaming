@@ -14,17 +14,11 @@ class UserService
     {
         //Create User
         $user = User::Create([
-            'name' =>$request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            
+
         ]);
-
-        //Login the registerd user
-        Auth::login($user);
-
-        //send the user to verfiy email event
-        event(new Registered($user));
 
         //assign user to role
         $role = Role::findByName('user');
@@ -35,6 +29,11 @@ class UserService
         // $role = Role::findByName('admin');
         // $user ->assignRole($role);
 
+        //Login the registerd user
+        Auth::login($user);
+
+        //send the user to verfiy email event
+        event(new Registered($user));
     }
 
     public function logoutUserService(Request $request)

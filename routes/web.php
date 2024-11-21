@@ -9,7 +9,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesAndPermissionController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
+use App\Mail\ThanksForBuying;
 use App\Models\Game;
+use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,4 +101,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/reset-password/{token}', [AuthController::class, 'passwordReset'])->name('password.reset');
 
     Route::post('/reset-password', [AuthController::class, 'passwordUpdate'])->name('password.update');
+
+    Route::get('test', function () {
+        $user = User::find(1);
+        $game = Game::find(9);
+        return new ThanksForBuying($user, $game);
+    });
+
+    Route::get('/chat', function () {
+        return view('chat');
+    });
 });

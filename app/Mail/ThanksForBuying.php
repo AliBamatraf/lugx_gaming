@@ -12,6 +12,8 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ThanksForBuying extends Mailable
 {
@@ -20,7 +22,7 @@ class ThanksForBuying extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user,public Game $game)
+    public function __construct(public User $user, public Game $game)
     {
         //
     }
@@ -32,7 +34,7 @@ class ThanksForBuying extends Mailable
     {
         return new Envelope(
             subject: 'Thanks For Buying',
-            from:new Address('luxgaming@gmail.com','mangement'),
+            from: new Address('luxgaming@gmail.com', 'management'),
         );
     }
 
@@ -43,7 +45,7 @@ class ThanksForBuying extends Mailable
     {
         return new Content(
             // markdown: 'mail.thanks-for-buying',
-            view:'mail.thanksForBuying',
+            view: 'mail.thanksForBuying',
         );
     }
 
@@ -54,8 +56,16 @@ class ThanksForBuying extends Mailable
      */
     public function attachments(): array
     {
-        return [
-            Attachment::fromStorageDisk('public',$this->game->image)
-        ];
+        $imagePath = $this->game->image; // Assuming this is the relative path in 'storage/app/public'
+
+        // Log and add attachment if exists
+        if (Storage::disk('public')->exists($imagePath)) {
+            return [
+                Attachment::fromStorageDisk('public', $imagePath)
+            ];
+        } else {
+            Log::error("Image not found: " . $imagePath);
+            return []; // No attachment if file is missing
+        }
     }
 }
