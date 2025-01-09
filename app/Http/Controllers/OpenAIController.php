@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\OpenAIService;
 
-class AiController extends Controller
+class OpenAIController extends Controller
 {
     protected $openAIService;
 
