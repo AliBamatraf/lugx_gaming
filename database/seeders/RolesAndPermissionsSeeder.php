@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -37,5 +38,13 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $roleAdmin->givePermissionTo( Permission::all()->where('name', '!=', 'Purchaes Game'));
         $roleUser->givePermissionTo('Purchaes Game');
+
+        $user = User::query()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'admin',
+        ]);
+
+        $user->assignRole('admin');
     }
 }

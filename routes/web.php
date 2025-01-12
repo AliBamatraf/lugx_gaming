@@ -6,6 +6,7 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\RolesAndPermissionController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
@@ -68,7 +69,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('deleteUser/{user}', [UserController::class, 'deleteUser'])->name('user.deleteUser');
     });
 
-    Route::get('/game/{game}', [GameController::class, 'show'])->middleware('verified')->name('game.show');
+    Route::get('/game/{game}', [GameController::class, 'show'])->name('game.show');
+    Route::post('/game/{game}/responses', [ResponseController::class, 'send'])->name('responses.send');
 });
 
 Route::middleware('guest')->group(function () {

@@ -47,21 +47,24 @@ class GameController extends Controller
             'success' => 'the game has been created'
         ]);
     }
-    //Display the specified resource.
+
     public function show(Game $game)
     {
-        //get the game with it categories
-        $currentGame = $game->load('categories');
+        // Get the game with its categories and related responses
+        $currentGame = $game->load(['categories', 'responses']); // Add 'responses' to load
 
-        //get some games to show to the user
+        // Get some related games to show to the user
         $games = Game::take(5)->select('id', 'image')
             ->with(['categories:id,name'])->get();
 
+        // Pass the current game and its responses to the view
         return view('game.show', [
             'currentGame' => $currentGame,
-            'games' => $games
+            'games' => $games,
+            'responses' => $currentGame->responses // Pass responses to the view
         ]);
     }
+
     //Show the form for editing the specified resource.
     public function edit(Game $game)
     {
