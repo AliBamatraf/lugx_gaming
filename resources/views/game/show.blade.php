@@ -64,25 +64,24 @@
                                     <p>{{$currentGame->description}}</p>
                                 </div>
 
-                                <!-- Responses Tab -->
                                 <div class="tab-pane fade" id="responses" role="tabpanel" aria-labelledby="responses-tab">
                                     <div>
                                         <h5>Previous Responses</h5>
                                         <ul id="responseList">
                                             @foreach($responses as $response)
-                                            <li>{{ $response->text }} - <small>{{ $response->created_at }}</small></li>
+                                            <li id="response-{{ $response->id }}">{{ $response->text }} - <small>{{ $response->created_at }}</small></li>
                                             @endforeach
                                         </ul>
                                     </div>
-
-                                    <!-- Show Response Form if User is Logged In -->
+                            
+                                    <!-- إظهار فورم الردود -->
                                     @auth
                                     <div>
                                         <h5>Submit a Response</h5>
                                         <form action="{{ route('responses.send', $currentGame) }}" method="POST">
                                             @csrf
                                             @method('POST')
-
+                            
                                             <input type="hidden" name="game_id" value="{{ $currentGame->id }}">
                                             <div class="mb-3">
                                                 <textarea class="form-control" name="text" rows="3" placeholder="Write your response here..."></textarea>
@@ -90,14 +89,13 @@
                                                 <div class="alert alert-warning" role="alert">
                                                     {{$message}}
                                                 </div>
-                                            @enderror
+                                                @enderror
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>
                                     @endauth
-
-                                    <!-- Show Message if User is Not Logged In -->
+                            
                                     @guest
                                     <div>
                                         <p>Please <a href="{{ route('login') }}">login</a> to submit a response.</p>
@@ -140,5 +138,27 @@
             </div>
         </div>
     </div>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 
+    <script>
+        // تهيئة Pusher
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('{{ config('broadcasting.connections.pusher.key') }}', {
+    cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}',
+    forceTLS: true // Ensure secure connection
+});
+
+        // الاشتراك في القناة
+        var channel = pusher.subscribe('response');
+        channel.bind('response', function(data) {
+    var responseList = document.getElementById('responseList');
+    if (responseList) {
+        var newResponse = document.createElement('li');
+        newResponse.textContent = data.text + " - " + new Date(data.created_at).toLocaleString();
+        responseList.appendChild(newResponse);
+    } else {
+        console.error('responseList element not found.');
+    }
+});
+    </script>
 </x-layout>

@@ -19,7 +19,7 @@ class ResponseService
         ]);
 
         // Trigger event for real-time update
-        broadcast(new ResponseAdded($response))->toOthers();
+        broadcast(new ResponseAdded($response));
 
         return $response;
     }

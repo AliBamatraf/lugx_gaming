@@ -22,6 +22,8 @@ class GoogleController extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')->stateless()->userFromToken($user ->token);
+            dd($googleUser,'jkhk');
 
             $finduser = User::where('google_id', $user->id)->first();
 

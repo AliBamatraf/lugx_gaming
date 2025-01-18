@@ -31,9 +31,7 @@ class ResponseAdded implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [
-            'public'
-        ];
+        return new PrivateChannel('response');
     }
 
     public function broadcastWith()
@@ -43,5 +41,10 @@ class ResponseAdded implements ShouldBroadcast
             'game_id' => $this->response->game_id,
             'text' => $this->response->text,
         ];
+    }
+
+    public function broadcastAs()
+    {
+        return 'response';
     }
 }

@@ -7,9 +7,7 @@ import "bootstrap";
  */
 
 import Echo from "laravel-echo";
-import Pusher from "pusher-js";
-
-window.Pusher = Pusher;
+window.Pusher = require("pusher-js");
 
 window.Echo = new Echo({
     broadcaster: "pusher",
@@ -18,36 +16,48 @@ window.Echo = new Echo({
     forceTLS: true,
 });
 
-// Listen for the ResponseCreated event
-window.Echo.channel("response-channel").listen("ResponseCreated", (event) => {
-    // Add the new response to the list dynamically
-    const responseList = document.getElementById("responseList");
-    const newResponse = document.createElement("li");
-    newResponse.innerHTML = `${event.message} - <small>${event.created_at}</small>`;
-    responseList.appendChild(newResponse);
-});
+// import Echo from "laravel-echo";
+// import Pusher from "pusher-js";
 
-// Handle the form submission
-document
-    .getElementById("responseForm")
-    .addEventListener("submit", function (e) {
-        e.preventDefault();
+// window.Pusher = Pusher;
 
-        let response = document.querySelector(
-            'textarea[name="response"]'
-        ).value;
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: '2de0610b1c42b335a6df',
+//     cluster: 'ap2',
+//     encrypted: true
+// });
 
-        axios
-            .post('{{ route("responses.store") }}', {
-                response: response,
-            })
-            .then((response) => {
-                document.querySelector('textarea[name="response"]').value = ""; // Clear textarea
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+// // Listen for the ResponseCreated event
+// window.Echo.channel("response-channel").listen("ResponseCreated", (event) => {
+//     // Add the new response to the list dynamically
+//     const responseList = document.getElementById("responseList");
+//     const newResponse = document.createElement("li");
+//     newResponse.innerHTML = `${event.message} - <small>${event.created_at}</small>`;
+//     responseList.appendChild(newResponse);
+// });
+
+// // Handle the form submission
+// document
+//     .getElementById("responseForm")
+//     .addEventListener("submit", function (e) {
+//         e.preventDefault();
+
+//         let response = document.querySelector(
+//             'textarea[name="response"]'
+//         ).value;
+
+//         axios
+//             .post('{{ route("responses.store") }}', {
+//                 response: response,
+//             })
+//             .then((response) => {
+//                 document.querySelector('textarea[name="response"]').value = ""; // Clear textarea
+//             })
+//             .catch((error) => {
+//                 console.log(error);
+//             });
+//     });
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
